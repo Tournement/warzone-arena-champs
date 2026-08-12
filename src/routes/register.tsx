@@ -169,7 +169,9 @@ function RegisterPage() {
         <div className="absolute inset-0 grid-lines opacity-20" />
         <div className="pointer-events-none absolute inset-0 noise-overlay opacity-[0.05]" />
         <div className="relative mx-auto max-w-5xl px-6 py-14">
-          <p className="label-mono">Season 04 · Squad application</p>
+          <p className="label-mono">
+            {SL_FLAG} Sri Lanka · Season 04 · Squad application
+          </p>
           <h1 className="mt-3 text-[clamp(2.5rem,7vw,5rem)] leading-[0.85]">
             Detailed <span className="text-primary">registration</span>
           </h1>
