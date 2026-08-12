@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import ghost from "@/assets/ghost.jpg.asset.json";
 import operator from "@/assets/operator.png.asset.json";
 import { Button } from "@/components/ui/button";
@@ -10,6 +10,9 @@ import SplitText from "@/components/bits/SplitText";
 import CountUp from "@/components/bits/CountUp";
 import SpotlightCard from "@/components/bits/SpotlightCard";
 import Marquee from "@/components/bits/Marquee";
+import SiteHeader from "@/components/SiteHeader";
+import SiteFooter from "@/components/SiteFooter";
+import { LIVE_EVENTS, GAMES, UPCOMING } from "@/lib/site-data";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -97,44 +100,7 @@ function Index() {
 
   return (
     <div className="min-h-screen bg-background">
-      <motion.header
-        className="absolute inset-x-0 top-0 z-20"
-        initial={{ opacity: 0, y: -24 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-      >
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-6">
-          <a href="#" className="group flex items-center gap-2">
-            <Crosshair className="size-5 text-primary transition-transform duration-500 group-hover:rotate-90" />
-            <span className="font-display text-2xl leading-none tracking-widest">Blackout</span>
-          </a>
-          <nav className="hidden items-center gap-8 md:flex">
-            {NAV.map((item, i) => (
-              <a
-                key={item}
-                href="#"
-                className={`story-link text-xs font-semibold uppercase tracking-[0.2em] transition-colors hover:text-primary ${
-                  i === 0 ? "text-primary" : "text-muted-foreground"
-                }`}
-              >
-                {item}
-              </a>
-            ))}
-          </nav>
-          <div className="flex items-center gap-3">
-            {[Instagram, Youtube, Twitch].map((Icon, i) => (
-              <a
-                key={i}
-                href="#"
-                aria-label="Social profile"
-                className="grid size-9 place-items-center rounded-full border border-border/70 text-muted-foreground transition-all duration-300 hover:-translate-y-0.5 hover:border-primary hover:text-primary"
-              >
-                <Icon className="size-4" />
-              </a>
-            ))}
-          </div>
-        </div>
-      </motion.header>
+      <SiteHeader />
 
       {/* HERO */}
       <section ref={heroRef} className="relative isolate overflow-hidden">
@@ -168,10 +134,11 @@ function Index() {
               </p>
               <div className="mt-8 flex flex-wrap items-center gap-4">
                 <Button
+                  asChild
                   size="lg"
                   className="pulse-dot rounded-full px-8 font-semibold uppercase tracking-widest transition-transform duration-300 hover:scale-105"
                 >
-                  Register squad
+                  <Link to="/register">Register squad</Link>
                 </Button>
                 <a
                   href="#tournaments"
@@ -211,6 +178,152 @@ function Index() {
       <div className="border-y border-border bg-surface/40 py-5">
         <Marquee items={TICKER} speed={30} />
       </div>
+
+      {/* LIVE BATTLES */}
+      <section className="mx-auto max-w-7xl px-6 pt-24">
+        <AnimatedContent className="flex flex-wrap items-end justify-between gap-6">
+          <div>
+            <p className="label-mono">Happening now</p>
+            <h2 className="mt-3 text-5xl leading-none md:text-6xl">
+              Live <span className="text-primary">battles</span>
+            </h2>
+          </div>
+          <Link
+            to="/register"
+            className="story-link text-xs font-semibold uppercase tracking-[0.2em] text-primary"
+          >
+            View all tournaments
+          </Link>
+        </AnimatedContent>
+
+        <div className="mt-10 grid gap-5 md:grid-cols-3">
+          {LIVE_EVENTS.map((e, i) => (
+            <AnimatedContent key={e.id} delay={i * 0.12} className="h-full">
+              <SpotlightCard className="flex h-full flex-col rounded-lg border border-border bg-surface p-6 transition-all duration-300 hover:-translate-y-1.5 hover:border-primary/60">
+                <span className="clip-tag inline-block w-fit bg-primary px-3 py-1 text-[0.625rem] font-bold uppercase tracking-[0.2em] text-primary-foreground">
+                  {e.state}
+                </span>
+                <h3 className="mt-5 text-3xl leading-none">{e.name}</h3>
+                <p className="mt-2 text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                  {e.mode}
+                </p>
+                <p className="mt-6 font-display text-4xl leading-none text-primary">{e.prize}</p>
+                <div className="mt-6">
+                  <div className="flex items-center justify-between text-xs text-muted-foreground">
+                    <span>{e.entrants} entered</span>
+                    <span>{e.capacity} slots</span>
+                  </div>
+                  <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-muted">
+                    <motion.div
+                      className="h-full rounded-full bg-primary"
+                      initial={{ width: 0 }}
+                      whileInView={{ width: `${(e.entrants / e.capacity) * 100}%` }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+                    />
+                  </div>
+                  <p className="mt-3 text-xs text-muted-foreground">{e.starts}</p>
+                </div>
+                <Button
+                  asChild
+                  className="mt-6 w-full rounded-full font-semibold uppercase tracking-widest"
+                >
+                  <Link to="/register">Apply</Link>
+                </Button>
+              </SpotlightCard>
+            </AnimatedContent>
+          ))}
+        </div>
+      </section>
+
+      {/* GAME SELECT */}
+      <section className="mx-auto max-w-7xl px-6 pt-24">
+        <AnimatedContent>
+          <p className="label-mono">Choose your battle</p>
+          <h2 className="mt-3 text-5xl leading-none md:text-6xl">
+            Select <span className="text-primary">your game</span>
+          </h2>
+        </AnimatedContent>
+        <div className="mt-10 grid gap-5 md:grid-cols-2">
+          {GAMES.map((g, i) => (
+            <AnimatedContent key={g.name} delay={i * 0.14}>
+              <div className="group relative isolate overflow-hidden rounded-lg border border-border">
+                <img
+                  src={i === 0 ? ghost.url : operator.url}
+                  alt={`${g.name} competitive mode artwork`}
+                  loading="lazy"
+                  className="aspect-16/10 w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-background/55" />
+                <div className="pointer-events-none absolute inset-0 noise-overlay opacity-[0.06]" />
+                <div className="absolute inset-x-0 bottom-0 p-6">
+                  <p className="label-mono">{g.tag}</p>
+                  <h3 className="mt-2 text-4xl leading-none">{g.name}</h3>
+                  <p className="mt-3 max-w-sm text-sm text-muted-foreground">{g.text}</p>
+                </div>
+              </div>
+            </AnimatedContent>
+          ))}
+        </div>
+      </section>
+
+      {/* UPCOMING TABLE */}
+      <section className="mx-auto max-w-7xl px-6 pt-24">
+        <AnimatedContent className="flex flex-wrap items-end justify-between gap-6 border-b border-border pb-6">
+          <div>
+            <p className="label-mono">Season 04 calendar</p>
+            <h2 className="mt-3 text-5xl leading-none md:text-6xl">Upcoming tournaments</h2>
+          </div>
+        </AnimatedContent>
+        <div className="mt-8 overflow-x-auto rounded-lg border border-border">
+          <table className="w-full min-w-2xl text-left">
+            <thead className="bg-surface">
+              <tr>
+                <th className="label-mono px-6 py-4">Event</th>
+                <th className="label-mono px-6 py-4">Date</th>
+                <th className="label-mono px-6 py-4">Prize</th>
+                <th className="label-mono px-6 py-4">Status</th>
+                <th className="label-mono px-6 py-4">Fill</th>
+                <th className="label-mono px-6 py-4 text-right">Entry</th>
+              </tr>
+            </thead>
+            <tbody>
+              {UPCOMING.map((u, i) => (
+                <motion.tr
+                  key={u.name}
+                  className="border-t border-border transition-colors hover:bg-surface/60"
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, amount: 0.4 }}
+                  transition={{ duration: 0.45, delay: i * 0.06, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  <td className="px-6 py-4 text-sm font-semibold tracking-wide">{u.name}</td>
+                  <td className="px-6 py-4 text-sm text-muted-foreground">{u.date}</td>
+                  <td className="px-6 py-4 font-display text-2xl leading-none text-primary">
+                    {u.prize}
+                  </td>
+                  <td className="px-6 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+                    {u.state}
+                  </td>
+                  <td className="px-6 py-4">
+                    <div className="h-1.5 w-28 overflow-hidden rounded-full bg-muted">
+                      <div className="h-full rounded-full bg-primary" style={{ width: `${u.fill}%` }} />
+                    </div>
+                  </td>
+                  <td className="px-6 py-4 text-right">
+                    <Link
+                      to="/register"
+                      className="story-link text-xs font-semibold uppercase tracking-[0.2em] text-primary"
+                    >
+                      Apply
+                    </Link>
+                  </td>
+                </motion.tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
 
       {/* TOURNAMENTS */}
       <section id="tournaments" className="mx-auto max-w-7xl px-6 py-24">
@@ -254,10 +367,11 @@ function Index() {
                   </div>
                 </dl>
                 <Button
+                  asChild
                   variant="outline"
                   className="mt-6 w-full rounded-full border-border font-semibold uppercase tracking-widest transition-colors hover:border-primary hover:text-primary"
                 >
-                  Enter lobby
+                  <Link to="/register">Apply now</Link>
                 </Button>
               </SpotlightCard>
             </AnimatedContent>
@@ -313,12 +427,12 @@ function Index() {
             <p className="label-mono">Circuit points · Season 04</p>
             <h2 className="mt-3 text-5xl leading-none md:text-6xl">Standings</h2>
           </div>
-          <a
-            href="#"
+          <Link
+            to="/leaderboard"
             className="story-link text-xs font-semibold uppercase tracking-[0.2em] text-primary"
           >
             Full leaderboard
-          </a>
+          </Link>
         </AnimatedContent>
 
         <div className="mt-8 overflow-hidden rounded-lg border border-border">
@@ -374,23 +488,16 @@ function Index() {
             twelve grand.
           </p>
           <Button
+            asChild
             size="lg"
             className="pulse-dot mt-8 rounded-full px-10 font-semibold uppercase tracking-widest transition-transform duration-300 hover:scale-105"
           >
-            Register squad
+            <Link to="/register">Register squad</Link>
           </Button>
         </AnimatedContent>
       </section>
 
-      <footer className="border-t border-border">
-        <div className="mx-auto flex max-w-7xl flex-col gap-4 px-6 py-10 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
-          <p className="flex items-center gap-2">
-            <Crosshair className="size-4 text-primary" />
-            <span className="font-display text-lg tracking-widest text-foreground">Blackout Circuit</span>
-          </p>
-          <p>Unofficial community event series. Not affiliated with Activision.</p>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }
