@@ -18,7 +18,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
-import { LIVE_EVENTS } from "@/lib/site-data";
+import { LIVE_EVENTS, SL_FLAG } from "@/lib/site-data";
 
 export const Route = createFileRoute("/register")({
   head: () => ({
