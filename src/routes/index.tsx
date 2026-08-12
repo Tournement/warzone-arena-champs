@@ -183,11 +183,14 @@ function Index() {
 
         <div className="mt-10 grid gap-5 md:grid-cols-3">
           {LIVE_EVENTS.map((e, i) => (
-            <AnimatedContent key={e.id} delay={i * 0.12} className="h-full">
+            <AnimatedContent key={e.id} delay={i * 0.12} className="h-full md:col-span-2 md:col-start-1">
               <SpotlightCard className="flex h-full flex-col rounded-lg border border-border bg-surface p-6 transition-all duration-300 hover:-translate-y-1.5 hover:border-primary/60">
-                <span className="clip-tag inline-block w-fit bg-primary px-3 py-1 text-[0.625rem] font-bold uppercase tracking-[0.2em] text-primary-foreground">
-                  {e.state}
-                </span>
+                <div className="flex items-center gap-2">
+                  <span className="clip-tag inline-block w-fit bg-primary px-3 py-1 text-[0.625rem] font-bold uppercase tracking-[0.2em] text-primary-foreground">
+                    {e.state}
+                  </span>
+                  <span className="text-lg" aria-label="Sri Lanka">{SL_FLAG}</span>
+                </div>
                 <h3 className="mt-5 text-3xl leading-none">{e.name}</h3>
                 <p className="mt-2 text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
                   {e.mode}
@@ -207,7 +210,10 @@ function Index() {
                       transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
                     />
                   </div>
-                  <p className="mt-3 text-xs text-muted-foreground">{e.starts}</p>
+                  <div className="mt-3 flex flex-wrap gap-x-4 text-xs text-muted-foreground">
+                    <span>Day 1: {e.starts}</span>
+                    <span>Day 2: {e.dayTwo}</span>
+                  </div>
                 </div>
                 <Button
                   asChild
