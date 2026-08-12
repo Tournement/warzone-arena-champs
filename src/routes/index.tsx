@@ -114,8 +114,8 @@ function Index() {
           <div className="mt-10 flex flex-col gap-10 md:flex-row md:items-end md:justify-between">
             <AnimatedContent delay={0.9} className="max-w-md">
               <p className="text-sm leading-relaxed text-muted-foreground">
-                Blackout Circuit runs weekly Call of Duty: Warzone competition — drop-in
-                qualifiers, seeded brackets and cash on the line every single weekend.
+                Sri Lanka&apos;s Call of Duty: Warzone tournament circuit. Squad Resurgence,
+                6 matches across 2 days, and a 100,000 LKR prize pool on the line.
               </p>
               <div className="mt-8 flex flex-wrap items-center gap-4">
                 <Button
