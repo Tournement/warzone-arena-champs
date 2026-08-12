@@ -21,7 +21,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Enter weekly Call of Duty: Warzone tournaments. $40K monthly prize pool, live brackets, verified squads and anti-cheat enforced lobbies.",
+          "Sri Lanka's Call of Duty: Warzone tournament circuit. Squad Resurgence, 6 matches across 2 days, 100,000 LKR prize pool, verified squads and anti-cheat enforced lobbies.",
       },
       { property: "og:title", content: "Blackout Circuit — COD Warzone Tournaments" },
       {
