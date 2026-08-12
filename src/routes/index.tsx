@@ -139,9 +139,9 @@ function Index() {
 
             <div className="flex flex-wrap gap-4">
               {[
-                { node: <CountUp to={40} prefix="$" suffix="K" />, label: "Monthly pool", accent: true },
-                { node: <CountUp to={10} suffix="K+" />, label: "Ranked players" },
-                { node: <CountUp to={64} />, label: "Squads per event" },
+                { node: <CountUp to={100} suffix="K LKR" />, label: "Prize pool", accent: true },
+                { node: <CountUp to={64} />, label: "Squad slots" },
+                { node: <CountUp to={6} />, label: "Matches" },
               ].map((s, i) => (
                 <AnimatedContent key={s.label} direction="up" delay={1 + i * 0.12}>
                   <SpotlightCard className="min-w-[10rem] rounded-lg border border-border/60 bg-surface/60 p-5 backdrop-blur transition-colors hover:border-primary/60">
