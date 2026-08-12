@@ -479,11 +479,11 @@ function Index() {
         <div className="pointer-events-none absolute inset-0 noise-overlay opacity-[0.06]" />
         <AnimatedContent className="relative mx-auto max-w-3xl px-6 py-28 text-center">
           <h2 className="text-[clamp(2.5rem,7vw,5rem)] leading-[0.85]">
-            Next drop in <span className="text-primary">3 days</span>
+            <span className="text-primary">{SL_FLAG}</span> Next drop in 3 days
           </h2>
           <p className="mx-auto mt-5 max-w-md text-sm text-muted-foreground">
-            Grab a slot for Verdansk Verdict before check-in closes. Four players, one bracket,
-            twelve grand.
+            Lock a slot for the Holiday Resurgence Showdown. Squad Resurgence, 6 matches across
+            2 days, 100,000 LKR on the line.
           </p>
           <Button
             asChild
