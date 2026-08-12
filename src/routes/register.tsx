@@ -74,7 +74,7 @@ function RegisterPage() {
   const [done, setDone] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [form, setForm] = useState({
-    event: LIVE_EVENTS[0].id,
+    event: LIVE_EVENTS[0]!.id,
     teamName: "",
     tag: "",
     region: "",

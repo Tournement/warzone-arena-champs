@@ -25,7 +25,7 @@ export default function SiteHeader({ solid = false }: { solid?: boolean }) {
             <Link
               key={item.label}
               to={item.to}
-              hash={item.hash}
+              {...(item.hash ? { hash: item.hash } : {})}
               className="story-link text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-primary"
               activeProps={{ className: "text-primary" }}
               activeOptions={{ exact: true }}
