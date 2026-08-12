@@ -330,12 +330,15 @@ function Index() {
 
         <div className="mt-10 grid gap-5 md:grid-cols-3">
           {TOURNAMENTS.map((t, i) => (
-            <AnimatedContent key={t.name} delay={i * 0.14} className="h-full">
+            <AnimatedContent key={t.name} delay={i * 0.14} className="h-full md:col-span-2 md:col-start-1">
               <SpotlightCard className="group flex h-full flex-col justify-between rounded-lg border border-border bg-surface p-6 transition-all duration-300 hover:-translate-y-1.5 hover:border-primary/60">
                 <div>
-                  <span className="clip-tag inline-block bg-primary px-3 py-1 text-[0.625rem] font-bold uppercase tracking-[0.2em] text-primary-foreground">
-                    {t.status}
-                  </span>
+                  <div className="flex items-center gap-2">
+                    <span className="clip-tag inline-block bg-primary px-3 py-1 text-[0.625rem] font-bold uppercase tracking-[0.2em] text-primary-foreground">
+                      {t.status}
+                    </span>
+                    <span className="text-lg" aria-label="Sri Lanka">{SL_FLAG}</span>
+                  </div>
                   <h3 className="mt-5 text-3xl leading-none transition-colors group-hover:text-primary">
                     {t.name}
                   </h3>
@@ -349,8 +352,12 @@ function Index() {
                     <dd className="font-display text-3xl leading-none text-primary">{t.prize}</dd>
                   </div>
                   <div className="flex items-center justify-between">
-                    <dt className="label-mono">Drop</dt>
+                    <dt className="label-mono">Day 1</dt>
                     <dd className="text-muted-foreground">{t.date}</dd>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <dt className="label-mono">Day 2</dt>
+                    <dd className="text-muted-foreground">{t.dayTwo}</dd>
                   </div>
                   <div className="flex items-center justify-between">
                     <dt className="label-mono">Slots</dt>
