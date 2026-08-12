@@ -61,9 +61,9 @@ function LeaderboardPage() {
 
           <div className="mt-10 grid gap-4 sm:grid-cols-3">
             {[
-              { node: <CountUp to={264} />, label: "Ranked squads" },
+              { node: <CountUp to={64} />, label: "Ranked squads" },
               { node: <CountUp to={1482} separator="," />, label: "Top score" },
-              { node: <CountUp to={231} prefix="$" suffix="K" />, label: "Season payouts" },
+              { node: <CountUp to={100} suffix="K LKR" />, label: "Season payouts" },
             ].map((s) => (
               <SpotlightCard
                 key={s.label}
