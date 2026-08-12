@@ -51,7 +51,9 @@ function LeaderboardPage() {
         <div className="pointer-events-none absolute inset-0 noise-overlay opacity-[0.05]" />
         <div className="relative mx-auto max-w-7xl px-6 py-16">
           <AnimatedContent>
-            <p className="label-mono">Season 04 · Circuit points</p>
+            <p className="label-mono">
+              {SL_FLAG} Sri Lanka · Season 04 · Circuit points
+            </p>
             <h1 className="mt-3 text-[clamp(2.75rem,8vw,6rem)] leading-[0.85]">
               Who&apos;s on <span className="text-primary">top</span>
             </h1>
