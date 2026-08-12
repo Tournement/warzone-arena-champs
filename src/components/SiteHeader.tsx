@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { Crosshair, Instagram, Youtube, Twitch } from "lucide-react";
 import { motion } from "motion/react";
-import { NAV } from "@/lib/site-data";
+import { NAV, SL_FLAG } from "@/lib/site-data";
 
 export default function SiteHeader({ solid = false }: { solid?: boolean }) {
   return (
@@ -19,6 +19,9 @@ export default function SiteHeader({ solid = false }: { solid?: boolean }) {
         <Link to="/" className="group flex items-center gap-2">
           <Crosshair className="size-5 text-primary transition-transform duration-500 group-hover:rotate-90" />
           <span className="font-display text-2xl leading-none tracking-widest">Blackout</span>
+          <span className="ml-1 text-lg" aria-label="Sri Lanka">
+            {SL_FLAG}
+          </span>
         </Link>
         <nav className="hidden items-center gap-8 md:flex">
           {NAV.map((item) => (

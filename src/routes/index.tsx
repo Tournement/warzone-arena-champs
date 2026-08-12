@@ -12,7 +12,7 @@ import SpotlightCard from "@/components/bits/SpotlightCard";
 import Marquee from "@/components/bits/Marquee";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
-import { LIVE_EVENTS, GAMES, UPCOMING } from "@/lib/site-data";
+import { LIVE_EVENTS, GAMES, UPCOMING, SL_FLAG, FORMAT } from "@/lib/site-data";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -21,7 +21,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Enter weekly Call of Duty: Warzone tournaments. $40K monthly prize pool, live brackets, verified squads and anti-cheat enforced lobbies.",
+          "Sri Lanka's Call of Duty: Warzone tournament circuit. Squad Resurgence, 6 matches across 2 days, 100,000 LKR prize pool, verified squads and anti-cheat enforced lobbies.",
       },
       { property: "og:title", content: "Blackout Circuit — COD Warzone Tournaments" },
       {
@@ -36,37 +36,24 @@ export const Route = createFileRoute("/")({
 });
 
 const TICKER = [
+  `${SL_FLAG} SRI LANKA`,
   "REGISTRATION OPEN",
-  "SEASON 04",
-  "$40K PRIZE POOL",
+  "SQUAD RESURGENCE",
+  "100,000 LKR PRIZE",
+  "6 MATCHES · 2 DAYS",
   "RICOCHET VERIFIED",
   "64 SQUADS",
 ];
 
 const TOURNAMENTS = [
   {
-    name: "Verdansk Verdict",
-    mode: "Quads · Battle Royale",
-    prize: "$12,000",
-    date: "Fri 14 Aug · 20:00 UTC",
-    slots: "38/64 squads",
+    name: "Holiday Resurgence Showdown",
+    mode: FORMAT,
+    prize: "100,000 LKR",
+    date: "24 Dec · 20:00 UTC",
+    dayTwo: "25 Dec · 20:00 UTC",
+    slots: "31/64 squads",
     status: "Registering",
-  },
-  {
-    name: "Resurgence Rampage",
-    mode: "Trios · Resurgence",
-    prize: "$6,500",
-    date: "Sat 15 Aug · 18:00 UTC",
-    slots: "51/64 squads",
-    status: "Registering",
-  },
-  {
-    name: "Blackout Invitational",
-    mode: "Duos · Kill Race",
-    prize: "$20,000",
-    date: "Sun 23 Aug · 21:00 UTC",
-    slots: "Invite only",
-    status: "Qualifiers",
   },
 ];
 
@@ -127,8 +114,8 @@ function Index() {
           <div className="mt-10 flex flex-col gap-10 md:flex-row md:items-end md:justify-between">
             <AnimatedContent delay={0.9} className="max-w-md">
               <p className="text-sm leading-relaxed text-muted-foreground">
-                Blackout Circuit runs weekly Call of Duty: Warzone competition — drop-in
-                qualifiers, seeded brackets and cash on the line every single weekend.
+                Sri Lanka&apos;s Call of Duty: Warzone tournament circuit. Squad Resurgence,
+                6 matches across 2 days, and a 100,000 LKR prize pool on the line.
               </p>
               <div className="mt-8 flex flex-wrap items-center gap-4">
                 <Button
@@ -152,9 +139,9 @@ function Index() {
 
             <div className="flex flex-wrap gap-4">
               {[
-                { node: <CountUp to={40} prefix="$" suffix="K" />, label: "Monthly pool", accent: true },
-                { node: <CountUp to={10} suffix="K+" />, label: "Ranked players" },
-                { node: <CountUp to={64} />, label: "Squads per event" },
+                { node: <CountUp to={100} suffix="K LKR" />, label: "Prize pool", accent: true },
+                { node: <CountUp to={64} />, label: "Squad slots" },
+                { node: <CountUp to={6} />, label: "Matches" },
               ].map((s, i) => (
                 <AnimatedContent key={s.label} direction="up" delay={1 + i * 0.12}>
                   <SpotlightCard className="min-w-[10rem] rounded-lg border border-border/60 bg-surface/60 p-5 backdrop-blur transition-colors hover:border-primary/60">
@@ -196,11 +183,14 @@ function Index() {
 
         <div className="mt-10 grid gap-5 md:grid-cols-3">
           {LIVE_EVENTS.map((e, i) => (
-            <AnimatedContent key={e.id} delay={i * 0.12} className="h-full">
+            <AnimatedContent key={e.id} delay={i * 0.12} className="h-full md:col-span-2 md:col-start-1">
               <SpotlightCard className="flex h-full flex-col rounded-lg border border-border bg-surface p-6 transition-all duration-300 hover:-translate-y-1.5 hover:border-primary/60">
-                <span className="clip-tag inline-block w-fit bg-primary px-3 py-1 text-[0.625rem] font-bold uppercase tracking-[0.2em] text-primary-foreground">
-                  {e.state}
-                </span>
+                <div className="flex items-center gap-2">
+                  <span className="clip-tag inline-block w-fit bg-primary px-3 py-1 text-[0.625rem] font-bold uppercase tracking-[0.2em] text-primary-foreground">
+                    {e.state}
+                  </span>
+                  <span className="text-lg" aria-label="Sri Lanka">{SL_FLAG}</span>
+                </div>
                 <h3 className="mt-5 text-3xl leading-none">{e.name}</h3>
                 <p className="mt-2 text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
                   {e.mode}
@@ -220,7 +210,10 @@ function Index() {
                       transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
                     />
                   </div>
-                  <p className="mt-3 text-xs text-muted-foreground">{e.starts}</p>
+                  <div className="mt-3 flex flex-wrap gap-x-4 text-xs text-muted-foreground">
+                    <span>Day 1: {e.starts}</span>
+                    <span>Day 2: {e.dayTwo}</span>
+                  </div>
                 </div>
                 <Button
                   asChild
@@ -337,12 +330,15 @@ function Index() {
 
         <div className="mt-10 grid gap-5 md:grid-cols-3">
           {TOURNAMENTS.map((t, i) => (
-            <AnimatedContent key={t.name} delay={i * 0.14} className="h-full">
+            <AnimatedContent key={t.name} delay={i * 0.14} className="h-full md:col-span-2 md:col-start-1">
               <SpotlightCard className="group flex h-full flex-col justify-between rounded-lg border border-border bg-surface p-6 transition-all duration-300 hover:-translate-y-1.5 hover:border-primary/60">
                 <div>
-                  <span className="clip-tag inline-block bg-primary px-3 py-1 text-[0.625rem] font-bold uppercase tracking-[0.2em] text-primary-foreground">
-                    {t.status}
-                  </span>
+                  <div className="flex items-center gap-2">
+                    <span className="clip-tag inline-block bg-primary px-3 py-1 text-[0.625rem] font-bold uppercase tracking-[0.2em] text-primary-foreground">
+                      {t.status}
+                    </span>
+                    <span className="text-lg" aria-label="Sri Lanka">{SL_FLAG}</span>
+                  </div>
                   <h3 className="mt-5 text-3xl leading-none transition-colors group-hover:text-primary">
                     {t.name}
                   </h3>
@@ -356,8 +352,12 @@ function Index() {
                     <dd className="font-display text-3xl leading-none text-primary">{t.prize}</dd>
                   </div>
                   <div className="flex items-center justify-between">
-                    <dt className="label-mono">Drop</dt>
+                    <dt className="label-mono">Day 1</dt>
                     <dd className="text-muted-foreground">{t.date}</dd>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <dt className="label-mono">Day 2</dt>
+                    <dd className="text-muted-foreground">{t.dayTwo}</dd>
                   </div>
                   <div className="flex items-center justify-between">
                     <dt className="label-mono">Slots</dt>
@@ -479,11 +479,11 @@ function Index() {
         <div className="pointer-events-none absolute inset-0 noise-overlay opacity-[0.06]" />
         <AnimatedContent className="relative mx-auto max-w-3xl px-6 py-28 text-center">
           <h2 className="text-[clamp(2.5rem,7vw,5rem)] leading-[0.85]">
-            Next drop in <span className="text-primary">3 days</span>
+            <span className="text-primary">{SL_FLAG}</span> Next drop in 3 days
           </h2>
           <p className="mx-auto mt-5 max-w-md text-sm text-muted-foreground">
-            Grab a slot for Verdansk Verdict before check-in closes. Four players, one bracket,
-            twelve grand.
+            Lock a slot for the Holiday Resurgence Showdown. Squad Resurgence, 6 matches across
+            2 days, 100,000 LKR on the line.
           </p>
           <Button
             asChild

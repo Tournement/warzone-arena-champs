@@ -8,7 +8,7 @@ import AnimatedContent from "@/components/bits/AnimatedContent";
 import CountUp from "@/components/bits/CountUp";
 import SpotlightCard from "@/components/bits/SpotlightCard";
 import { Button } from "@/components/ui/button";
-import { LEADERBOARD } from "@/lib/site-data";
+import { LEADERBOARD, SL_FLAG } from "@/lib/site-data";
 
 export const Route = createFileRoute("/leaderboard")({
   head: () => ({
@@ -51,7 +51,9 @@ function LeaderboardPage() {
         <div className="pointer-events-none absolute inset-0 noise-overlay opacity-[0.05]" />
         <div className="relative mx-auto max-w-7xl px-6 py-16">
           <AnimatedContent>
-            <p className="label-mono">Season 04 · Circuit points</p>
+            <p className="label-mono">
+              {SL_FLAG} Sri Lanka · Season 04 · Circuit points
+            </p>
             <h1 className="mt-3 text-[clamp(2.75rem,8vw,6rem)] leading-[0.85]">
               Who&apos;s on <span className="text-primary">top</span>
             </h1>
@@ -59,9 +61,9 @@ function LeaderboardPage() {
 
           <div className="mt-10 grid gap-4 sm:grid-cols-3">
             {[
-              { node: <CountUp to={264} />, label: "Ranked squads" },
+              { node: <CountUp to={64} />, label: "Ranked squads" },
               { node: <CountUp to={1482} separator="," />, label: "Top score" },
-              { node: <CountUp to={231} prefix="$" suffix="K" />, label: "Season payouts" },
+              { node: <CountUp to={100} suffix="K LKR" />, label: "Season payouts" },
             ].map((s) => (
               <SpotlightCard
                 key={s.label}

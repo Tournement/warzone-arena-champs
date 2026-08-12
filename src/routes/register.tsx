@@ -18,7 +18,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
-import { LIVE_EVENTS } from "@/lib/site-data";
+import { LIVE_EVENTS, SL_FLAG } from "@/lib/site-data";
 
 export const Route = createFileRoute("/register")({
   head: () => ({
@@ -169,7 +169,9 @@ function RegisterPage() {
         <div className="absolute inset-0 grid-lines opacity-20" />
         <div className="pointer-events-none absolute inset-0 noise-overlay opacity-[0.05]" />
         <div className="relative mx-auto max-w-5xl px-6 py-14">
-          <p className="label-mono">Season 04 · Squad application</p>
+          <p className="label-mono">
+            {SL_FLAG} Sri Lanka · Season 04 · Squad application
+          </p>
           <h1 className="mt-3 text-[clamp(2.5rem,7vw,5rem)] leading-[0.85]">
             Detailed <span className="text-primary">registration</span>
           </h1>
@@ -208,15 +210,21 @@ function RegisterPage() {
                         : "border-border bg-background/60"
                     }`}
                   >
-                    <span className="clip-tag inline-block bg-primary px-3 py-1 text-[0.625rem] font-bold uppercase tracking-[0.2em] text-primary-foreground">
-                      {e.state}
-                    </span>
+                    <div className="flex items-center gap-2">
+                      <span className="clip-tag inline-block bg-primary px-3 py-1 text-[0.625rem] font-bold uppercase tracking-[0.2em] text-primary-foreground">
+                        {e.state}
+                      </span>
+                      <span className="text-base" aria-label="Sri Lanka">{SL_FLAG}</span>
+                    </div>
                     <h3 className="mt-4 text-2xl leading-none">{e.name}</h3>
                     <p className="mt-2 text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
                       {e.mode}
                     </p>
                     <p className="mt-4 font-display text-3xl leading-none text-primary">{e.prize}</p>
-                    <p className="mt-2 text-xs text-muted-foreground">{e.starts}</p>
+                    <div className="mt-2 space-y-1 text-xs text-muted-foreground">
+                      <p>Day 1: {e.starts}</p>
+                      <p>Day 2: {e.dayTwo}</p>
+                    </div>
                     <p className="mt-1 text-xs text-muted-foreground">
                       {e.entrants}/{e.capacity} slots filled
                     </p>
