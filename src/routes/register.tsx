@@ -63,8 +63,8 @@ const schema = z.object({
   roster: z.array(rosterMember).min(2, "At least two players"),
   stream: z.string().trim().url("Must be a valid URL").max(200).optional().or(z.literal("")),
   notes: z.string().trim().max(600).optional().or(z.literal("")),
-  rules: z.literal(true, { message: "You must accept the ruleset" }),
-  pov: z.literal(true, { message: "POV recording is mandatory" }),
+  rules: z.boolean().refine((v) => v, { message: "You must accept the ruleset" }),
+  pov: z.boolean().refine((v) => v, { message: "POV recording is mandatory" }),
 });
 
 const STEPS = ["Event", "Squad", "Roster", "Confirm"];
@@ -112,6 +112,16 @@ function RegisterPage() {
       const flat: Record<string, string> = {};
       for (const issue of result.error.issues) flat[issue.path.join(".")] = issue.message;
       setErrors(flat);
+      const firstStep = result.error.issues.some((i) =>
+        ["teamName", "tag", "region", "platform", "captainEmail", "discord"].includes(
+          String(i.path[0]),
+        ),
+      )
+        ? 1
+        : result.error.issues.some((i) => String(i.path[0]) === "roster")
+          ? 2
+          : 3;
+      setStep(firstStep);
       toast.error("Check the highlighted fields before submitting.");
       return;
     }
