@@ -210,15 +210,21 @@ function RegisterPage() {
                         : "border-border bg-background/60"
                     }`}
                   >
-                    <span className="clip-tag inline-block bg-primary px-3 py-1 text-[0.625rem] font-bold uppercase tracking-[0.2em] text-primary-foreground">
-                      {e.state}
-                    </span>
+                    <div className="flex items-center gap-2">
+                      <span className="clip-tag inline-block bg-primary px-3 py-1 text-[0.625rem] font-bold uppercase tracking-[0.2em] text-primary-foreground">
+                        {e.state}
+                      </span>
+                      <span className="text-base" aria-label="Sri Lanka">{SL_FLAG}</span>
+                    </div>
                     <h3 className="mt-4 text-2xl leading-none">{e.name}</h3>
                     <p className="mt-2 text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
                       {e.mode}
                     </p>
                     <p className="mt-4 font-display text-3xl leading-none text-primary">{e.prize}</p>
-                    <p className="mt-2 text-xs text-muted-foreground">{e.starts}</p>
+                    <div className="mt-2 space-y-1 text-xs text-muted-foreground">
+                      <p>Day 1: {e.starts}</p>
+                      <p>Day 2: {e.dayTwo}</p>
+                    </div>
                     <p className="mt-1 text-xs text-muted-foreground">
                       {e.entrants}/{e.capacity} slots filled
                     </p>
