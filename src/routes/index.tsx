@@ -12,7 +12,7 @@ import SpotlightCard from "@/components/bits/SpotlightCard";
 import Marquee from "@/components/bits/Marquee";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
-import { LIVE_EVENTS, GAMES, UPCOMING } from "@/lib/site-data";
+import { LIVE_EVENTS, GAMES, UPCOMING, SL_FLAG, FORMAT } from "@/lib/site-data";
 
 export const Route = createFileRoute("/")({
   head: () => ({
