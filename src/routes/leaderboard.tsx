@@ -8,7 +8,7 @@ import AnimatedContent from "@/components/bits/AnimatedContent";
 import CountUp from "@/components/bits/CountUp";
 import SpotlightCard from "@/components/bits/SpotlightCard";
 import { Button } from "@/components/ui/button";
-import { LEADERBOARD } from "@/lib/site-data";
+import { LEADERBOARD, SL_FLAG } from "@/lib/site-data";
 
 export const Route = createFileRoute("/leaderboard")({
   head: () => ({
