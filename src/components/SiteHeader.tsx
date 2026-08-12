@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { Crosshair, Instagram, Youtube, Twitch } from "lucide-react";
 import { motion } from "motion/react";
-import { NAV } from "@/lib/site-data";
+import { NAV, SL_FLAG } from "@/lib/site-data";
 
 export default function SiteHeader({ solid = false }: { solid?: boolean }) {
   return (
