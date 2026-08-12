@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import ghost from "@/assets/ghost.jpg.asset.json";
 import operator from "@/assets/operator.png.asset.json";
 import { Button } from "@/components/ui/button";
-import { Crosshair, Trophy, Users, Zap, ChevronRight, Instagram, Youtube, Twitch } from "lucide-react";
+import { Crosshair, Trophy, Users, Zap, ChevronRight } from "lucide-react";
 import { motion, useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
 import AnimatedContent from "@/components/bits/AnimatedContent";
@@ -34,8 +34,6 @@ export const Route = createFileRoute("/")({
   }),
   component: Index,
 });
-
-const NAV = ["Home", "Tournaments", "Brackets", "Teams", "Community"];
 
 const TICKER = [
   "REGISTRATION OPEN",
