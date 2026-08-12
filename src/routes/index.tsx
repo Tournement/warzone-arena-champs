@@ -36,37 +36,24 @@ export const Route = createFileRoute("/")({
 });
 
 const TICKER = [
+  `${SL_FLAG} SRI LANKA`,
   "REGISTRATION OPEN",
-  "SEASON 04",
-  "$40K PRIZE POOL",
+  "SQUAD RESURGENCE",
+  "100,000 LKR PRIZE",
+  "6 MATCHES · 2 DAYS",
   "RICOCHET VERIFIED",
   "64 SQUADS",
 ];
 
 const TOURNAMENTS = [
   {
-    name: "Verdansk Verdict",
-    mode: "Quads · Battle Royale",
-    prize: "$12,000",
-    date: "Fri 14 Aug · 20:00 UTC",
-    slots: "38/64 squads",
+    name: "Holiday Resurgence Showdown",
+    mode: FORMAT,
+    prize: "100,000 LKR",
+    date: "24 Dec · 20:00 UTC",
+    dayTwo: "25 Dec · 20:00 UTC",
+    slots: "31/64 squads",
     status: "Registering",
-  },
-  {
-    name: "Resurgence Rampage",
-    mode: "Trios · Resurgence",
-    prize: "$6,500",
-    date: "Sat 15 Aug · 18:00 UTC",
-    slots: "51/64 squads",
-    status: "Registering",
-  },
-  {
-    name: "Blackout Invitational",
-    mode: "Duos · Kill Race",
-    prize: "$20,000",
-    date: "Sun 23 Aug · 21:00 UTC",
-    slots: "Invite only",
-    status: "Qualifiers",
   },
 ];
 
