@@ -1,7 +1,7 @@
-# Update tournament details to Squad Resurgence main event
+# Update tournament details to Sri Lankan Squad Resurgence main event
 
 ## Goal
-Replace the mixed tournament lineup with one featured main event using the corrected format: **Squad · Resurgence, 6 matches across 2 days, 100,000 LKR prize pool**, dropping on **24 Dec · 20:00 UTC** and **25 Dec · 20:00 UTC**.
+Replace the mixed tournament lineup with one featured Sri Lankan tournament using the corrected format: **Squad · Resurgence, 6 matches across 2 days, 100,000 LKR prize pool**, dropping on **24 Dec · 20:00 UTC** and **25 Dec · 20:00 UTC**. Add Sri Lankan flag branding to reinforce the local identity.
 
 ## Changes
 
