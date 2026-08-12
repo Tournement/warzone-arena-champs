@@ -5,35 +5,20 @@ export const NAV = [
   { label: "Register", to: "/register" as const },
 ];
 
+export const SL_FLAG = "🇱🇰";
+
+export const FORMAT = "Squad · Resurgence · 6 matches · 2 days";
+
 export const LIVE_EVENTS = [
   {
-    id: "dropzone-duos",
-    name: "Dropzone Duos",
-    mode: "Duos · Battle Royale",
-    prize: "$3,000",
-    entrants: 127,
-    capacity: 160,
-    starts: "Aug 12 · 20:00 UTC",
-    state: "Live now",
-  },
-  {
-    id: "clash-night",
-    name: "Clash Night",
-    mode: "Quads · Kill Race",
-    prize: "$2,500",
-    entrants: 88,
-    capacity: 128,
-    starts: "Aug 13 · 19:00 UTC",
-    state: "Check-in",
-  },
-  {
-    id: "night-raid-solo",
-    name: "Night Raid Solo",
-    mode: "Solo · Resurgence",
-    prize: "$1,000",
-    entrants: 212,
-    capacity: 256,
-    starts: "Aug 14 · 21:00 UTC",
+    id: "holiday-resurgence-showdown",
+    name: "Holiday Resurgence Showdown",
+    mode: "Squad · Resurgence",
+    prize: "100,000 LKR",
+    entrants: 31,
+    capacity: 64,
+    starts: "24 Dec · 20:00 UTC",
+    dayTwo: "25 Dec · 20:00 UTC",
     state: "Registering",
   },
 ];
@@ -52,12 +37,9 @@ export const GAMES = [
 ];
 
 export const UPCOMING = [
-  { name: "Clash Night", date: "Aug 13", prize: "$2,500", fill: 68, state: "Registering" },
-  { name: "Night Raid Solo", date: "Aug 14", prize: "$1,000", fill: 82, state: "Registering" },
-  { name: "Blood Cup Open", date: "Aug 18", prize: "$5,000", fill: 41, state: "Registering" },
-  { name: "Vanguard Quads", date: "Aug 21", prize: "$8,000", fill: 24, state: "Qualifiers" },
-  { name: "Iron Circuit", date: "Aug 25", prize: "$12,000", fill: 12, state: "Invite" },
-  { name: "Rapid Fire Cup", date: "Aug 29", prize: "$3,500", fill: 5, state: "Soon" },
+  { name: "Holiday Resurgence Showdown", date: "24–25 Dec", prize: "100,000 LKR", fill: 48, state: "Registering" },
+  { name: "New Year Knockout", date: "31 Dec", prize: "75,000 LKR", fill: 22, state: "Soon" },
+  { name: "January Open", date: "10 Jan", prize: "50,000 LKR", fill: 12, state: "Soon" },
 ];
 
 export type LeaderRow = {
