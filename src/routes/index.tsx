@@ -12,21 +12,34 @@ import SpotlightCard from "@/components/bits/SpotlightCard";
 import Marquee from "@/components/bits/Marquee";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
-import { LIVE_EVENTS, GAMES, UPCOMING, SL_FLAG, FORMAT } from "@/lib/site-data";
+import RulesBoard from "@/components/RulesBoard";
+import bloodStrike from "@/assets/blood-strike.jpg.asset.json";
+import {
+  LIVE_EVENTS,
+  GAMES,
+  UPCOMING,
+  SL_FLAG,
+  FORMAT,
+  BRAND_FULL,
+  PRIZE_TOTAL,
+  PRIZE_SPLIT,
+  SQUAD_SLOTS,
+  TAGLINE,
+} from "@/lib/site-data";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Blackout Circuit — COD Warzone Tournaments & Cash Prizes" },
+      { title: "Squad Zone LK — COD Warzone Tournaments in Sri Lanka" },
       {
         name: "description",
         content:
-          "Sri Lanka's Call of Duty: Warzone tournament circuit. Squad Resurgence, 6 matches across 2 days, 100,000 LKR prize pool, verified squads and anti-cheat enforced lobbies.",
+          "Squad Zone APAC Arena — Sri Lanka's Call of Duty: Warzone tournament circuit. Squad Resurgence, 6 matches across 2 days, 120,000 LKR prize pool, 13 squad slots, anti-cheat enforced lobbies.",
       },
-      { property: "og:title", content: "Blackout Circuit — COD Warzone Tournaments" },
+      { property: "og:title", content: "Squad Zone LK — COD Warzone Tournaments" },
       {
         property: "og:description",
-        content: "Weekly Warzone tournaments with cash prize pools and live brackets.",
+        content: "Squad Zone APAC Arena — Compete. Dominate. Get Paid. 120,000 LKR Warzone Resurgence tournament.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -39,20 +52,20 @@ const TICKER = [
   `${SL_FLAG} SRI LANKA`,
   "REGISTRATION OPEN",
   "SQUAD RESURGENCE",
-  "100,000 LKR PRIZE",
+  "120,000 LKR PRIZE",
   "6 MATCHES · 2 DAYS",
   "RICOCHET VERIFIED",
-  "64 SQUADS",
+  "13 SQUAD SLOTS",
 ];
 
 const TOURNAMENTS = [
   {
-    name: "Holiday Resurgence Showdown",
+    name: "Resurgence Custom Lobby Tournament",
     mode: FORMAT,
-    prize: "100,000 LKR",
+    prize: PRIZE_TOTAL,
     date: "24 Dec · 20:00 UTC",
     dayTwo: "25 Dec · 20:00 UTC",
-    slots: "31/64 squads",
+    slots: `${SQUAD_SLOTS} squads`,
     status: "Registering",
   },
 ];
@@ -114,8 +127,11 @@ function Index() {
           <div className="mt-10 flex flex-col gap-10 md:flex-row md:items-end md:justify-between">
             <AnimatedContent delay={0.9} className="max-w-md">
               <p className="text-sm leading-relaxed text-muted-foreground">
-                Sri Lanka&apos;s Call of Duty: Warzone tournament circuit. Squad Resurgence,
-                6 matches across 2 days, and a 100,000 LKR prize pool on the line.
+                {BRAND_FULL} — Sri Lanka&apos;s Call of Duty: Warzone circuit. Squad Resurgence,
+                6 matches across 2 days, and a {PRIZE_TOTAL} prize pool on the line.
+                <span className="mt-2 block font-semibold uppercase tracking-[0.18em] text-primary">
+                  {TAGLINE}
+                </span>
               </p>
               <div className="mt-8 flex flex-wrap items-center gap-4">
                 <Button
@@ -139,8 +155,8 @@ function Index() {
 
             <div className="flex flex-wrap gap-4">
               {[
-                { node: <CountUp to={100} suffix="K LKR" />, label: "Prize pool", accent: true },
-                { node: <CountUp to={64} />, label: "Squad slots" },
+                { node: <CountUp to={120} suffix="K LKR" />, label: "Prize pool", accent: true },
+                { node: <CountUp to={SQUAD_SLOTS} />, label: "Squad slots" },
                 { node: <CountUp to={6} />, label: "Matches" },
               ].map((s, i) => (
                 <AnimatedContent key={s.label} direction="up" delay={1 + i * 0.12}>
@@ -240,17 +256,34 @@ function Index() {
             <AnimatedContent key={g.name} delay={i * 0.14}>
               <div className="group relative isolate overflow-hidden rounded-lg border border-border">
                 <img
-                  src={i === 0 ? ghost.url : operator.url}
+                  src={i === 0 ? ghost.url : bloodStrike.url}
                   alt={`${g.name} competitive mode artwork`}
                   loading="lazy"
                   className="aspect-16/10 w-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-background/55" />
                 <div className="pointer-events-none absolute inset-0 noise-overlay opacity-[0.06]" />
+                <span
+                  className={`clip-tag absolute left-6 top-6 px-3 py-1 text-[0.625rem] font-bold uppercase tracking-[0.2em] ${
+                    g.status === "live"
+                      ? "bg-primary text-primary-foreground"
+                      : "bg-muted text-foreground"
+                  }`}
+                >
+                  {g.status === "live" ? "Live now" : "Coming soon"}
+                </span>
                 <div className="absolute inset-x-0 bottom-0 p-6">
                   <p className="label-mono">{g.tag}</p>
                   <h3 className="mt-2 text-4xl leading-none">{g.name}</h3>
                   <p className="mt-3 max-w-sm text-sm text-muted-foreground">{g.text}</p>
+                  {g.status === "live" ? (
+                    <Link
+                      to="/scoreboard/warzone"
+                      className="story-link mt-4 inline-block text-xs font-semibold uppercase tracking-[0.2em] text-primary"
+                    >
+                      Open scoreboard
+                    </Link>
+                  ) : null}
                 </div>
               </div>
             </AnimatedContent>
@@ -377,6 +410,43 @@ function Index() {
         </div>
       </section>
 
+      {/* PRIZE SPLIT */}
+      <section className="mx-auto max-w-7xl px-6 pb-4">
+        <div className="grid gap-5 md:grid-cols-3">
+          <AnimatedContent className="rounded-lg border border-primary/50 bg-primary/10 p-6">
+            <p className="label-mono">Total prize pool</p>
+            <p className="mt-3 font-display text-5xl leading-none text-primary">{PRIZE_TOTAL}</p>
+          </AnimatedContent>
+          {PRIZE_SPLIT.map((p, i) => (
+            <AnimatedContent
+              key={p.place}
+              delay={0.1 + i * 0.1}
+              className="rounded-lg border border-border bg-surface p-6"
+            >
+              <p className="label-mono">{p.place}</p>
+              <p className="mt-3 font-display text-5xl leading-none">{p.amount}</p>
+            </AnimatedContent>
+          ))}
+        </div>
+      </section>
+
+      {/* RULES & REGULATIONS */}
+      <section id="rules" className="mx-auto max-w-7xl px-6 py-24">
+        <AnimatedContent className="border-b border-border pb-6">
+          <p className="label-mono">Read before you drop</p>
+          <h2 className="mt-3 text-5xl leading-none md:text-6xl">
+            Rules &amp; <span className="text-primary">regulations</span>
+          </h2>
+          <p className="mt-4 max-w-2xl text-sm text-muted-foreground">
+            Every squad accepts this ruleset at check-in. Breaches are enforced live by admins —
+            penalties range from point deductions to full disqualification.
+          </p>
+        </AnimatedContent>
+        <div className="mt-10">
+          <RulesBoard />
+        </div>
+      </section>
+
       {/* FORMAT / OPERATOR SPLIT */}
       <section className="relative border-y border-border bg-surface/40">
         <div className="mx-auto grid max-w-7xl gap-12 px-6 py-24 lg:grid-cols-2 lg:items-center">
@@ -482,8 +552,8 @@ function Index() {
             <span className="text-primary">{SL_FLAG}</span> Next drop in 3 days
           </h2>
           <p className="mx-auto mt-5 max-w-md text-sm text-muted-foreground">
-            Lock a slot for the Holiday Resurgence Showdown. Squad Resurgence, 6 matches across
-            2 days, 100,000 LKR on the line.
+            Lock one of {SQUAD_SLOTS} slots for the Resurgence Custom Lobby Tournament. 6 matches
+            across 2 days, {PRIZE_TOTAL} on the line.
           </p>
           <Button
             asChild
