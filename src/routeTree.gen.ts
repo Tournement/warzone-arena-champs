@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as LeaderboardRouteImport } from './routes/leaderboard'
 import { Route as RegisterRouteImport } from './routes/register'
+import { Route as ScoreboardIndexRouteImport } from './routes/scoreboard.index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -34,18 +35,25 @@ const RegisterRoute = RegisterRouteImport.update({
   path: '/register',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ScoreboardIndexRoute = ScoreboardIndexRouteImport.update({
+  id: '/scoreboard/',
+  path: '/scoreboard/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/leaderboard': typeof LeaderboardRoute
   '/register': typeof RegisterRoute
+  '/scoreboard/': typeof ScoreboardIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/leaderboard': typeof LeaderboardRoute
   '/register': typeof RegisterRoute
+  '/scoreboard': typeof ScoreboardIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -53,13 +61,15 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/leaderboard': typeof LeaderboardRoute
   '/register': typeof RegisterRoute
+  '/scoreboard/': typeof ScoreboardIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/leaderboard' | '/register'
+  fullPaths: '/' | '/about' | '/leaderboard' | '/register' | '/scoreboard/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/leaderboard' | '/register'
-  id: '__root__' | '/' | '/about' | '/leaderboard' | '/register'
+  to: '/' | '/about' | '/leaderboard' | '/register' | '/scoreboard'
+  id:
+    '__root__' | '/' | '/about' | '/leaderboard' | '/register' | '/scoreboard/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -67,6 +77,7 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   LeaderboardRoute: typeof LeaderboardRoute
   RegisterRoute: typeof RegisterRoute
+  ScoreboardIndexRoute: typeof ScoreboardIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -99,6 +110,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RegisterRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/scoreboard/': {
+      id: '/scoreboard/'
+      path: '/scoreboard'
+      fullPath: '/scoreboard/'
+      preLoaderRoute: typeof ScoreboardIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -107,6 +125,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   LeaderboardRoute: LeaderboardRoute,
   RegisterRoute: RegisterRoute,
+  ScoreboardIndexRoute: ScoreboardIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
