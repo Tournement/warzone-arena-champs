@@ -13,13 +13,13 @@ import { LEADERBOARD, SL_FLAG } from "@/lib/site-data";
 export const Route = createFileRoute("/leaderboard")({
   head: () => ({
     meta: [
-      { title: "Season 04 Leaderboard — Blackout Circuit Warzone" },
+      { title: "Season 04 Leaderboard — Squad Zone APAC Arena" },
       {
         name: "description",
         content:
           "Full Warzone circuit standings: squad points, K/D, wins, region and prize earnings for every ranked roster in Season 04.",
       },
-      { property: "og:title", content: "Season 04 Leaderboard — Blackout Circuit" },
+      { property: "og:title", content: "Season 04 Leaderboard — Squad Zone LK" },
       {
         property: "og:description",
         content: "Complete Warzone squad standings with points, K/D, wins and earnings.",
