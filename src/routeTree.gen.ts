@@ -14,6 +14,7 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as LeaderboardRouteImport } from './routes/leaderboard'
 import { Route as RegisterRouteImport } from './routes/register'
 import { Route as ScoreboardIndexRouteImport } from './routes/scoreboard.index'
+import { Route as ScoreboardWarzoneRouteImport } from './routes/scoreboard.warzone'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -40,12 +41,18 @@ const ScoreboardIndexRoute = ScoreboardIndexRouteImport.update({
   path: '/scoreboard/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ScoreboardWarzoneRoute = ScoreboardWarzoneRouteImport.update({
+  id: '/scoreboard/warzone',
+  path: '/scoreboard/warzone',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/leaderboard': typeof LeaderboardRoute
   '/register': typeof RegisterRoute
+  '/scoreboard/warzone': typeof ScoreboardWarzoneRoute
   '/scoreboard/': typeof ScoreboardIndexRoute
 }
 export interface FileRoutesByTo {
@@ -53,6 +60,7 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/leaderboard': typeof LeaderboardRoute
   '/register': typeof RegisterRoute
+  '/scoreboard/warzone': typeof ScoreboardWarzoneRoute
   '/scoreboard': typeof ScoreboardIndexRoute
 }
 export interface FileRoutesById {
@@ -61,15 +69,34 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/leaderboard': typeof LeaderboardRoute
   '/register': typeof RegisterRoute
+  '/scoreboard/warzone': typeof ScoreboardWarzoneRoute
   '/scoreboard/': typeof ScoreboardIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/leaderboard' | '/register' | '/scoreboard/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/leaderboard'
+    | '/register'
+    | '/scoreboard/warzone'
+    | '/scoreboard/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/leaderboard' | '/register' | '/scoreboard'
+  to:
+    | '/'
+    | '/about'
+    | '/leaderboard'
+    | '/register'
+    | '/scoreboard/warzone'
+    | '/scoreboard'
   id:
-    '__root__' | '/' | '/about' | '/leaderboard' | '/register' | '/scoreboard/'
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/leaderboard'
+    | '/register'
+    | '/scoreboard/warzone'
+    | '/scoreboard/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -77,6 +104,7 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   LeaderboardRoute: typeof LeaderboardRoute
   RegisterRoute: typeof RegisterRoute
+  ScoreboardWarzoneRoute: typeof ScoreboardWarzoneRoute
   ScoreboardIndexRoute: typeof ScoreboardIndexRoute
 }
 
@@ -117,6 +145,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ScoreboardIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/scoreboard/warzone': {
+      id: '/scoreboard/warzone'
+      path: '/scoreboard/warzone'
+      fullPath: '/scoreboard/warzone'
+      preLoaderRoute: typeof ScoreboardWarzoneRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -125,6 +160,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   LeaderboardRoute: LeaderboardRoute,
   RegisterRoute: RegisterRoute,
+  ScoreboardWarzoneRoute: ScoreboardWarzoneRoute,
   ScoreboardIndexRoute: ScoreboardIndexRoute,
 }
 export const routeTree = rootRouteImport
