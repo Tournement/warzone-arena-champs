@@ -14,16 +14,181 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      match_player_stats: {
+        Row: {
+          assists: number
+          created_at: string
+          damage: number
+          id: string
+          kills: number
+          match_no: number
+          player_id: string
+          redeploys: number
+          score: number
+          squad_id: string
+        }
+        Insert: {
+          assists?: number
+          created_at?: string
+          damage?: number
+          id?: string
+          kills?: number
+          match_no: number
+          player_id: string
+          redeploys?: number
+          score?: number
+          squad_id: string
+        }
+        Update: {
+          assists?: number
+          created_at?: string
+          damage?: number
+          id?: string
+          kills?: number
+          match_no?: number
+          player_id?: string
+          redeploys?: number
+          score?: number
+          squad_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "match_player_stats_player_id_fkey"
+            columns: ["player_id"]
+            isOneToOne: false
+            referencedRelation: "squad_players"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "match_player_stats_squad_id_fkey"
+            columns: ["squad_id"]
+            isOneToOne: false
+            referencedRelation: "squads"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      match_team_entries: {
+        Row: {
+          created_at: string
+          id: string
+          match_no: number
+          placement: number | null
+          squad_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          match_no: number
+          placement?: number | null
+          squad_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          match_no?: number
+          placement?: number | null
+          squad_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "match_team_entries_squad_id_fkey"
+            columns: ["squad_id"]
+            isOneToOne: false
+            referencedRelation: "squads"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      squad_players: {
+        Row: {
+          created_at: string
+          id: string
+          is_reserve: boolean
+          name: string
+          squad_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_reserve?: boolean
+          name: string
+          squad_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_reserve?: boolean
+          name?: string
+          squad_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "squad_players_squad_id_fkey"
+            columns: ["squad_id"]
+            isOneToOne: false
+            referencedRelation: "squads"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      squads: {
+        Row: {
+          created_at: string
+          id: string
+          name: string
+          tag: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          name: string
+          tag?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          name?: string
+          tag?: string | null
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "moderator" | "user"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +315,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "moderator", "user"],
+    },
   },
 } as const
