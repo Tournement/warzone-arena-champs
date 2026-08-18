@@ -9,7 +9,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { supabase } from "@/integrations/supabase/client";
-import { lovable } from "@/integrations/lovable";
 import { SL_FLAG } from "@/lib/site-data";
 
 export const Route = createFileRoute("/auth")({
@@ -89,14 +88,6 @@ function AuthPage() {
     }
   };
 
-  const google = async () => {
-    try {
-      await lovable.auth.signInWithOAuth("google", { redirect_uri: window.location.origin });
-    } catch (e) {
-      toast.error(e instanceof Error ? e.message : "Google sign-in failed");
-    }
-  };
-
   return (
     <div className="min-h-screen bg-background">
       <SiteHeader solid />
@@ -147,14 +138,6 @@ function AuthPage() {
                 disabled={busy}
               >
                 {mode === "signin" ? "Sign in" : "Create account"}
-              </Button>
-              <Button
-                variant="outline"
-                className="w-full rounded-full uppercase tracking-widest"
-                onClick={google}
-                disabled={busy}
-              >
-                Continue with Google
               </Button>
               <button
                 className="w-full text-xs uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-primary"
