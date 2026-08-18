@@ -1,7 +1,14 @@
+export const BRAND = "𝑺 𝑸 𝑼 𝑨 𝑫 𝒛𝒐𝒏𝒆";
+export const BRAND_SUFFIX = "LK";
+export const BRAND_FULL = "SQUAD ZONE APAC ARENA";
+export const TAGLINE = "Compete. Dominate. Get Paid.";
+
 export const NAV = [
   { label: "Home", to: "/" as const },
   { label: "Tournaments", to: "/" as const, hash: "tournaments" },
+  { label: "Scoreboard", to: "/scoreboard" as const },
   { label: "Leaderboard", to: "/leaderboard" as const },
+  { label: "About", to: "/about" as const },
   { label: "Register", to: "/register" as const },
 ];
 
@@ -9,16 +16,24 @@ export const SL_FLAG = "🇱🇰";
 
 export const FORMAT = "Squad · Resurgence · 6 matches · 2 days";
 
+export const PRIZE_TOTAL = "120,000 LKR";
+export const PRIZE_SPLIT = [
+  { place: "1st place", amount: "80,000 LKR" },
+  { place: "2nd place", amount: "40,000 LKR" },
+];
+
+export const SQUAD_SLOTS = 13;
+
 export const LIVE_EVENTS = [
   {
-    id: "holiday-resurgence-showdown",
-    name: "Holiday Resurgence Showdown",
+    id: "resurgence-custom-lobby",
+    name: "Resurgence Custom Lobby Tournament",
     mode: "Squad · Resurgence",
-    prize: "100,000 LKR",
-    entrants: 31,
-    capacity: 64,
-    starts: "24 Dec · 20:00 UTC",
-    dayTwo: "25 Dec · 20:00 UTC",
+    prize: PRIZE_TOTAL,
+    entrants: 7,
+    capacity: SQUAD_SLOTS,
+    starts: "4 Dec · 20:00 UTC",
+    dayTwo: "5 Dec · 20:00 UTC",
     state: "Registering",
   },
 ];
@@ -27,17 +42,25 @@ export const GAMES = [
   {
     name: "Warzone",
     tag: "Tactical · Brutal · Competitive",
-    text: "Squad-based battle royale with verified rosters and enforced anti-cheat on every drop.",
+    text: "Squad-based Resurgence with verified rosters and enforced anti-cheat on every drop.",
+    status: "live" as const,
   },
   {
     name: "Blood Strike",
     tag: "High speed · Fast paced",
     text: "Short-fuse skirmishes for teams who want a bracket done in a single night.",
+    status: "soon" as const,
   },
 ];
 
 export const UPCOMING = [
-  { name: "Holiday Resurgence Showdown", date: "24–25 Dec", prize: "100,000 LKR", fill: 48, state: "Registering" },
+  {
+    name: "Resurgence Custom Lobby Tournament",
+    date: "4–5 Dec",
+    prize: PRIZE_TOTAL,
+    fill: 54,
+    state: "Registering",
+  },
   { name: "New Year Knockout", date: "31 Dec", prize: "75,000 LKR", fill: 22, state: "Soon" },
   { name: "January Open", date: "10 Jan", prize: "50,000 LKR", fill: 12, state: "Soon" },
 ];
