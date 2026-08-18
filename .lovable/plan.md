@@ -45,6 +45,7 @@
 - Reads/writes go through TanStack server functions; admin routes live under the protected `_authenticated` layout with an admin-role gate.
 - Registration form remains client-validated with zod; no backend submission changes unless you want registrations stored too (say the word and I'll add it).
 
-## Waiting on you
+## Ready to build
 
-Upload the official Blood Strike image and I'll wire it into the game tile; everything else can proceed without it.
+Blood Strike artwork received — nothing else is outstanding.
+
