@@ -18,18 +18,19 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
-import { LIVE_EVENTS, SL_FLAG } from "@/lib/site-data";
+import RulesBoard from "@/components/RulesBoard";
+import { LIVE_EVENTS, SL_FLAG, BRAND_FULL, SQUAD_SLOTS } from "@/lib/site-data";
 
 export const Route = createFileRoute("/register")({
   head: () => ({
     meta: [
-      { title: "Squad Registration — Blackout Circuit Warzone Tournaments" },
+      { title: "Squad Registration — Squad Zone APAC Arena Warzone" },
       {
         name: "description",
         content:
           "Register your Warzone squad: pick an event, submit roster Activision IDs, region and stream details, then confirm the ruleset to lock your slot.",
       },
-      { property: "og:title", content: "Squad Registration — Blackout Circuit" },
+      { property: "og:title", content: "Squad Registration — Squad Zone APAC Arena" },
       {
         property: "og:description",
         content: "Detailed Warzone tournament registration form for competitive squads.",
@@ -60,14 +61,14 @@ const schema = z.object({
   platform: z.string().min(1, "Select a platform"),
   captainEmail: z.string().trim().email("Valid email required").max(255),
   discord: z.string().trim().min(2, "Discord handle required").max(60),
-  roster: z.array(rosterMember).min(2, "At least two players"),
+  roster: z.array(rosterMember).min(2, "At least two players").max(5, "Maximum 4 players plus 1 reserve"),
   stream: z.string().trim().url("Must be a valid URL").max(200).optional().or(z.literal("")),
   notes: z.string().trim().max(600).optional().or(z.literal("")),
   rules: z.boolean().refine((v) => v, { message: "You must accept the ruleset" }),
   pov: z.boolean().refine((v) => v, { message: "POV recording is mandatory" }),
 });
 
-const STEPS = ["Event", "Squad", "Roster", "Confirm"];
+const STEPS = ["Event", "Rules", "Squad", "Roster", "Confirm"];
 
 function RegisterPage() {
   const [step, setStep] = useState(0);
@@ -82,6 +83,7 @@ function RegisterPage() {
     captainEmail: "",
     discord: "",
     roster: [
+      { gamertag: "", activisionId: "" },
       { gamertag: "", activisionId: "" },
       { gamertag: "", activisionId: "" },
       { gamertag: "", activisionId: "" },
@@ -117,10 +119,10 @@ function RegisterPage() {
           String(i.path[0]),
         ),
       )
-        ? 1
+        ? 2
         : result.error.issues.some((i) => String(i.path[0]) === "roster")
-          ? 2
-          : 3;
+          ? 3
+          : 4;
       setStep(firstStep);
       toast.error("Check the highlighted fields before submitting.");
       return;
@@ -237,6 +239,21 @@ function RegisterPage() {
 
           {step === 1 && (
             <div className="space-y-6">
+              <h2 className="text-3xl leading-none">
+                Rules &amp; <span className="text-primary">regulations</span>
+              </h2>
+              <p className="text-sm text-muted-foreground">
+                Only {SQUAD_SLOTS} squad slots exist. Read the full ruleset — you confirm acceptance
+                on the final step.
+              </p>
+              <div className="max-h-[32rem] overflow-y-auto rounded-lg border border-border bg-background/40 p-4">
+                <RulesBoard compact />
+              </div>
+            </div>
+          )}
+
+          {step === 2 && (
+            <div className="space-y-6">
               <h2 className="text-3xl leading-none">Squad details</h2>
               <div className="grid gap-5 md:grid-cols-2">
                 <div>
@@ -320,16 +337,24 @@ function RegisterPage() {
             </div>
           )}
 
-          {step === 2 && (
+          {step === 3 && (
             <div className="space-y-6">
               <h2 className="text-3xl leading-none">Roster & streams</h2>
               <p className="text-sm text-muted-foreground">
-                Activision IDs must match the accounts that drop in. Minimum two players.
+                Activision IDs must match the accounts that drop in. Four starters plus one
+                reserve — minimum two players to submit.
               </p>
               <div className="space-y-4">
                 {form.roster.map((m, i) => (
                   <div key={i} className="grid gap-4 rounded-lg border border-border bg-background/50 p-4 md:grid-cols-[3rem_1fr_1fr]">
-                    <p className="font-display text-3xl leading-none text-steel">0{i + 1}</p>
+                    <p className="font-display text-3xl leading-none text-steel">
+                      0{i + 1}
+                      {i === 4 ? (
+                        <span className="mt-1 block text-[0.625rem] uppercase tracking-[0.18em] text-primary">
+                          reserve
+                        </span>
+                      ) : null}
+                    </p>
                     <div>
                       <Label htmlFor={`gt-${i}`}>Gamertag</Label>
                       <Input
@@ -383,7 +408,7 @@ function RegisterPage() {
             </div>
           )}
 
-          {step === 3 && (
+          {step === 4 && (
             <div className="space-y-6">
               <h2 className="text-3xl leading-none">Confirm & lock slot</h2>
               <dl className="grid gap-4 rounded-lg border border-border bg-background/50 p-6 text-sm md:grid-cols-2">
@@ -414,7 +439,7 @@ function RegisterPage() {
                     aria-label="Accept ruleset"
                   />
                   <span className="text-muted-foreground">
-                    I accept the Blackout Circuit ruleset, Ricochet anti-cheat verification and
+                    I accept the {BRAND_FULL} ruleset, Ricochet anti-cheat verification and
                     admin decisions as final.
                   </span>
                 </label>
