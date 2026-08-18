@@ -24,7 +24,8 @@
 
 ## 5. Game tiles
 
-- Blood Strike tile: swap to the official artwork you upload, with a "Coming soon" badge and the tile made non-clickable until launch. Warzone tile stays active.
+- Blood Strike tile: use the official artwork you just uploaded (added as a CDN asset), with a "Coming soon" badge and the tile non-clickable until launch. Warzone tile stays active.
+
 
 ## 6. Scoreboard (new tab) + Admin
 
