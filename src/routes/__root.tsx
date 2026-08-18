@@ -78,13 +78,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Blackout Circuit — COD Warzone Tournaments" },
+      { title: "Squad Zone LK — COD Warzone Tournaments" },
       {
         name: "description",
         content:
           "Competitive Call of Duty: Warzone tournaments with weekly cash prize pools, live brackets and verified squads.",
       },
-      { property: "og:title", content: "Blackout Circuit — COD Warzone Tournaments" },
+      { property: "og:title", content: "Squad Zone LK — COD Warzone Tournaments" },
       {
         property: "og:description",
         content: "Weekly Warzone tournaments, cash prize pools and live brackets.",
