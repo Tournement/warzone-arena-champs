@@ -18,7 +18,10 @@ export default function SiteHeader({ solid = false }: { solid?: boolean }) {
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
         <Link to="/" className="group flex items-center gap-2">
           <Crosshair className="size-5 text-primary transition-transform duration-500 group-hover:rotate-90" />
-          <span className="font-display text-2xl leading-none tracking-widest">Blackout</span>
+          <span className="text-xl leading-none font-semibold italic tracking-wide">{BRAND}</span>
+          <span className="font-display text-xl leading-none tracking-widest text-primary">
+            {BRAND_SUFFIX}
+          </span>
           <span className="ml-1 text-lg" aria-label="Sri Lanka">
             {SL_FLAG}
           </span>
