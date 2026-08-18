@@ -24,7 +24,8 @@
 
 ## 5. Game tiles
 
-- Blood Strike tile: swap to the official artwork you upload, with a "Coming soon" badge and the tile made non-clickable until launch. Warzone tile stays active.
+- Blood Strike tile: use the official artwork you just uploaded (added as a CDN asset), with a "Coming soon" badge and the tile non-clickable until launch. Warzone tile stays active.
+
 
 ## 6. Scoreboard (new tab) + Admin
 
@@ -44,6 +45,7 @@
 - Reads/writes go through TanStack server functions; admin routes live under the protected `_authenticated` layout with an admin-role gate.
 - Registration form remains client-validated with zod; no backend submission changes unless you want registrations stored too (say the word and I'll add it).
 
-## Waiting on you
+## Ready to build
 
-Upload the official Blood Strike image and I'll wire it into the game tile; everything else can proceed without it.
+Blood Strike artwork received — nothing else is outstanding.
+
